@@ -1,60 +1,89 @@
+<!DOCTYPE html>
+<html>
+<header> 
+    CALCULATOR
+ <header>
+    <!-- sets the header of the program -->
+<body>
+ 
 <?php
-// CLASSES IN OOP
-class BankAccount
+ini_set('display_errors',0);
+ 
+if( isset( $_REQUEST['calculate'] ))
 {
-}
-// defining a class called BankAccount
-
-// defining a method within a class
-class ClassName
+$operator=$_REQUEST['operator'];
+$n1 = $_REQUEST['first_value'];
+$n2 = $_REQUEST['second_value'];
+// sets the variables needed throughout the program
+ 
+if($operator=="+")
 {
-	public function methodName(parameter_list)
-	{
-		// implementation
-	}
-}
-// Like a property, a method also has one of the three visibility modifiers: public, private, and protected. If you define a method without any visibility modifier, it defaults to public.
-
-// In PHP, $this keyword references the current object of the class. The $this keyword allows you to access the properties and methods of the current object within the class using the object operator (->)
-
-class BankAccount
-{
-	public $accountNumber;
-
-	public $balance;
-
-	public function deposit($amount)
-	{
-		if ($amount > 0) {
-			$this->balance += $amount;
-		}
-	}
-
-
-
-	public function withdraw($amount)
-	{
-		if ($amount <= $this->balance) {
-			$this->balance -= $amount;
-			return true;
-		}
-                return false;
-
-	}
-
+$res= $n1+$n2;
 }
 
-// this is called method chaining
-$account->deposit(100)
-	->deposit(200)
-	->deposit(300);
+if($operator=="-")
+{
+$res= $n1-$n2;
+}
 
+if($operator=="*")
+{
+$res =$n1*$n2;
+}
 
-/*
-types of access:
-Use the public access modifier to allow access to properties and methods from both inside and outside of the class.
-Use the private access modifier to prevent access from the outside of the class.
-Do use private properties with a pair of public getter/setter methods.
-*/
+if($operator=="/")
+{
+$res= $n1/$n2;
+}
+ // tells the program what to do when each operator is selected e.g. addition or subtraction
 
-// there is a constructor and destructor method which can be used to help reduce the complexity of code.
+if($_REQUEST['first_value']==NULL || $_REQUEST['second_value']==NULL)
+{
+echo "<script language=javascript> alert(\"Please Enter Correct values.\");</script>";
+// form fo validation to ensure the user enters correct numbers
+}
+}
+?>
+ 
+<form>
+<table style="border:groove #00FF99">
+<!-- sets the appearance -->
+ 
+<tr>
+<td style="background-color:turquoise; color:black; font-family:'Times New Roman'">Enter Number</td>
+<td colspan="1">
+<input name="first_value" type="text" style="color:red"/></td>
+</tr>
+ 
+<tr>
+<td style="color:red; font-family:'Times New Roman'">Select Operator</td>
+<td>
+<select name="operator" style="width: 63px">
+<option>+</option>
+<option>-</option>
+<option>*</option>
+<option>/</option>
+</select></td>
+</tr>
+ 
+<tr>
+<td style="background-color:turquoise; color:black; font-family:'Times New Roman'">Enter Number</td>
+<td class="auto-style5">
+<input name="second_value" type="text"  style="color:red"/></td> 
+</tr>
+ 
+<tr>
+<td></td>
+<td><input type="submit" name="calculate" value="Calculate" style="color:wheat;background-color:rosybrown" /></td>	 
+</tr>
+ 
+<tr>
+<td style="background-color:turquoise;color:black">Output = </td>
+<td style="color:darkblue"><?php echo $res;?></td>
+</tr>	
+ 
+</table>
+</form>
+ 
+</body>
+</html>
