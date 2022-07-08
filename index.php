@@ -1,88 +1,72 @@
 <?php
-// FUNCTIONS
+// ARRAYS
 
-function welcome() 
-{  
-    echo 'Welcome';
+// Associative arrays
+// Associative arrays are arrays that allow you to keep track of elements by names rather than by numbers.
+$html = array();
+// used to create an array
+$html['title'] = 'PHP Associative Arrays';
+$html['description'] = 'Learn how to use associative arrays in PHP';
+
+echo $html['title'];
+// you have to use the key to add elements to the array
+
+foreach ($array_name as $element) {
+    // process element here
 }
-// defining functions
+// to iterate over items in an associative array e.g.
+$capitals = [
+	'Japan' => 'Tokyo',
+	'France' => 'Paris',
+	'Germany' => 'Berlin',
+	'United Kingdom' => 'London',
+	'United States' => 'Washington D.C.'
+];
 
-//the inputs make functions reusable and more useful. And the inputs of a function are called parameters. A function may have zero or more parameters.
-
-welcome();
-// calling a function
-
-// you can pass arguements through functions
-function welcome_user($username)
-{
-	echo 'Welcome ' . $username;
-}
-
-welcome('Admin');
-
-//an argument is a piece of data that you pass into the function when you call it.
-return value;
-// used to return a value (print)
-
-// passing by VALUE
-$counter = 1;
-function increase($value)
-{
-	$value+= 1;
-	echo $value. <br>; // 2
+foreach ($capitals as $country => $capital) {
+	echo "The capital city of {$country} is $capital" . '<br>';
 }
 
-// increase the counter
-increase($counter);
+// used to iterate over items in an array
+// e.g.
+$colors = ['red', 'green', 'blue'];
 
-echo $counter . <br>; // 1
-/* 
-When the value of an argument within the function is changed and doesn’t get changed outside the function, it is passed by value.
-
-By default, arguments are passed by values in PHP. If you want a function to change its arguments, you need to pass the arguments by reference.
-*/
-
-
-// passing by REFERENCE
-$counter = 1;
-function increase( &$value )
-{
-	$value += 1;
-	echo $value . <br>; // 2
+foreach ($colors as $color) {
+	echo $color . '<br>';
 }
 
-// increase the counter
-increase($counter);
+// Adding items to a multi-dimensional array
+$tasks = [
+	['Learn PHP programming', 2],
+	['Practice PHP', 2],
+	['Work', 8],
+	['Do exercise', 1],
+];
 
-echo $counter . <br>; // 2
+$tasks[] = ['Build something matter in PHP', 2];
+// adding the item
 
+print_r($tasks );
 
-// GLOBAL AND LOCAL VARIABLES
-$message = 'Hello';
+// Removing items from a multi-dimensional array
+$tasks = [
+	['Learn PHP programming', 2],
+	['Practice PHP', 2],
+	['Work', 8],
+	['Do exercise',1],
+];
 
-function say()
-{
-	global $message;
-	echo $message; // Hello
+unset($tasks[2]);
+// uses unset
+
+print_r($tasks);
+
+// array_splice can be used to re-index arrays
+array_splice($tasks[2], 2, 1);
+
+// to iterate a multi-dimensional array you need a nested foreach loop
+foreach ($tasks as $task) {
+	foreach ($task as $task_detail) {
+		echo $task_detail . '<br>';
+	}
 }
-
-say();
-// PHP allows you to access a global variable within a function by using the global keyword.
-
-// STATIC VARIABLES
-//A static variable retains its value between function calls. Also, a static variable is only accessible inside the function. To define a static variable, you use the static keyword. 
-function get_counter() {
-    static $counter = 1;
-    return $counter++;
-}
-
-echo get_counter() .  '<br>'; // 1
-echo get_counter() .  '<br>'; // 2
-echo get_counter() .  '<br>'; // 3
-
-// VARIADIC FUNCTIONS
-/*
-A variadic function accepts a variable number of arguments.
-Do use the ... operator to define a variadic function.
-Only the last parameter can be variadic.
-*/
