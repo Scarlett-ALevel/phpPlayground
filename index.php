@@ -1,9 +1,10 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>My Playground</title>
+    <meta charset="UTF-8">
+    <title>PHP Syntax</title>
 </head>
 <body>
-    <h1>My Playground</h1>
-    <?php echo "Hello World!";?>
+        <h1><?php echo 'PHP Syntax'; ?></h1>
 </body>
 </html>
