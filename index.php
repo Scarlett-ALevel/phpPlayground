@@ -1,142 +1,88 @@
 <?php
+// FUNCTIONS
 
-// IF STATEMENTS
-$is_admin = true;
-if ($is_admin)
-    echo 'Welcome, admin!';
-// this uses an if statement to check if admin is set to true. Because it is, it outputs the statement.
-
-// If you want to execute multiple statements in the if block, you can use curly braces to group multiple statements
-if ( expression ) {
-    statement1;
-    statement2;
-    // more statement
- }
-
-// you can nest if statements
-$is_admin = true;
-$can_approve = true;
-
-if ($is_admin) {
-	echo 'Welcome, admin!';
-	if ($can_approve) {
-		echo 'Please approve the pending items';
-	}
+function welcome() 
+{  
+    echo 'Welcome';
 }
-// Do use the pattern if ( value == $variable_name ) {} to avoid possible mistakes.
-if ( $is_authenticated ) {
-    echo 'Welcome!';
-} 
-else {
-     echo 'You are not authorized to access this page.'
-}
-// you can use else statements after an if
-// this allows you to mix with html
+// defining functions
 
-if ( expression ): ?>
-    <!--Show HTML code when expression is true -->
-    <?php else: ?>
-    <!--Show HTML code when expression is false -->
-    <?php endif ?>
+//the inputs make functions reusable and more useful. And the inputs of a function are called parameters. A function may have zero or more parameters.
 
-<?php
-//Use the if...elseif statement to evaluate multiple expressions and execute code blocks conditionally.
+welcome();
+// calling a function
 
-// SWITCH STATEMENTS
-$role = 'admin';
-$message = '';
-
-switch ($role) {
-	case 'admin':
-		$message = 'Welcome, admin!';
-		break;
-	case 'editor':
-		$message = 'Welcome! You have some pending articles to edit';
-		break;
-	case 'author':
-		$message = 'Welcome! Do you want to publish the draft article?';
-		break;
-	case 'subscriber':
-		$message = 'Welcome! Check out some new articles.';
-		break;
-	default:
-		$message = 'You are not authorized to access this page';
+// you can pass arguements through functions
+function welcome_user($username)
+{
+	echo 'Welcome ' . $username;
 }
 
-echo $message;
-//Since PHP executes the switch statement from the matching case label till it encounters the break statement, you can combine several cases in one.
-$message = '';
-$role = 'author';
+welcome('Admin');
 
-switch ($role) {
-	case 'admin':
-		$message = 'Welcome, admin!';
-		break;
-	case 'editor':
-	case 'author':
-		$message = 'Welcome! Do you want to create a new article?';
-		break;
-	case 'subscriber':
-		$message = 'Welcome! Check out some new articles.';
-		break;
-	default:
-		$message = 'You are not authorized to access this page';
+//an argument is a piece of data that you pass into the function when you call it.
+return value;
+// used to return a value (print)
+
+// passing by VALUE
+$counter = 1;
+function increase($value)
+{
+	$value+= 1;
+	echo $value. <br>; // 2
 }
 
-echo $message;
+// increase the counter
+increase($counter);
 
-// FOR STATEMENTS
-for (; ;) {
-	// do something
-	// ...
+echo $counter . <br>; // 1
+/* 
+When the value of an argument within the function is changed and doesn’t get changed outside the function, it is passed by value.
 
-	// exit the loop
-	if (condition) {
-		break;
-	}
-}
-// e.g.
-$total = 0;
-
-for ($i = 1; $i <= 10; $i++) {
-	$total += $i;
-}
-
-echo $total;
-
-// WHILE STATEMENTS
-<?php
-
-while (expression) {
-	statement;
-}
-// e.g
-$total = 0;
-$number = 1;
-
-while ($number <= 10) {
-	$total += $number;
-	$number++;
-}
-
-echo $total;
-
-/* Typically, you use the break statement with the if statement that specifies the condition for the terminating loop.
-
-The break statement accepts an optional number that specifies the number of nested enclosing structures to be broken out of.
-
-If you don’t specify the optional number, it defaults to 1. In this case, the break statement only terminates the immediate enclosing structure.
-
+By default, arguments are passed by values in PHP. If you want a function to change its arguments, you need to pass the arguments by reference.
 */
 
-// CONTINUE STATEMENTS
-//The continue statement is used within a loop structure such as for, do...while, and while loop. The continue statement allows you to immediately skip all the statements that follow it and start the next iteration from the beginning.
-for ($i = 0; $i < 10; $i++) {
-	if ($i % 2 === 0) {
-		continue;
-	}
-	echo "$i\n";
-}
-//First, use a for loop to iterate from 0 to 9.
-//Second, skip the current echo statement if $i is an even number. The $i is an even number when the $i % 2 returns 0. As a result, the output shows only the odd numbers.
 
+// passing by REFERENCE
+$counter = 1;
+function increase( &$value )
+{
+	$value += 1;
+	echo $value . <br>; // 2
+}
+
+// increase the counter
+increase($counter);
+
+echo $counter . <br>; // 2
+
+
+// GLOBAL AND LOCAL VARIABLES
+$message = 'Hello';
+
+function say()
+{
+	global $message;
+	echo $message; // Hello
+}
+
+say();
+// PHP allows you to access a global variable within a function by using the global keyword.
+
+// STATIC VARIABLES
+//A static variable retains its value between function calls. Also, a static variable is only accessible inside the function. To define a static variable, you use the static keyword. 
+function get_counter() {
+    static $counter = 1;
+    return $counter++;
+}
+
+echo get_counter() .  '<br>'; // 1
+echo get_counter() .  '<br>'; // 2
+echo get_counter() .  '<br>'; // 3
+
+// VARIADIC FUNCTIONS
+/*
+A variadic function accepts a variable number of arguments.
+Do use the ... operator to define a variadic function.
+Only the last parameter can be variadic.
+*/
