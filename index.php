@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP Variables</title>
-</head>
-<body>
-    <?php
-        $title = 'PHP is awesome!';
-    ?>
-    <h1><?php echo $title; ?></h1>
-</body>
-</html>
+
+<?php
+// store the logic for defining and assigning value to variables
+$title = 'PHP is awesome!';
+// sets the title of the webpage
+require 'index.view.php';
+// includes the code from index.view.php in this file
