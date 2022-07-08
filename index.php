@@ -1,72 +1,88 @@
 <?php
-// ARRAYS
+// ARRAY SORT
+// The sort() function sorts the elements of an array in place in ascending order.
+sort(array &$array, int $flags = SORT_REGULAR): bool
 
-// Associative arrays
-// Associative arrays are arrays that allow you to keep track of elements by names rather than by numbers.
-$html = array();
-// used to create an array
-$html['title'] = 'PHP Associative Arrays';
-$html['description'] = 'Learn how to use associative arrays in PHP';
+/*
+The sort() function has two parameters:
+  $array is the input array to sort.
+  $flags argument is one or a combination of multiple flags that change the sorting behavior of the function.
+*/
 
-echo $html['title'];
-// you have to use the key to add elements to the array
+$names = ['Bob', 'John', 'Alice'];
+sort($names, SORT_STRING);
 
-foreach ($array_name as $element) {
-    // process element here
-}
-// to iterate over items in an associative array e.g.
-$capitals = [
-	'Japan' => 'Tokyo',
-	'France' => 'Paris',
-	'Germany' => 'Berlin',
-	'United Kingdom' => 'London',
-	'United States' => 'Washington D.C.'
+print_r($names);
+// sorts the names alphabtically
+
+// rsort()
+// The rsort() function is like the sort() function except that it sorts the elements of an array in descending order.
+rsort(array &$array, int $flags = SORT_REGULAR): bool
+
+
+$ranks = ['A-1', 'A-2', 'A-12', 'A-11'];
+rsort($ranks, SORT_STRING | SORT_NATURAL);
+// sorts it in its 'natural order'
+
+print_r($ranks);
+
+// ksort()
+// the ksort() function sorts the elements of an array by their keys. The ksort() is mainly useful for sorting associative arrays.
+
+$employees = [
+    'john' => [
+        'age' => 24,
+        'title' => 'Front-end Developer'
+    ],
+    'alice' => [
+        'age' => 28,
+        'title' => 'Web Designer'
+    ],
+    'bob' => [
+        'age' => 25,
+        'title' => 'MySQL DBA'
+    ]
 ];
+ksort($employees, SORT_STRING);
 
-foreach ($capitals as $country => $capital) {
-	echo "The capital city of {$country} is $capital" . '<br>';
-}
+print_r($employees);
+// first it defines the array, then it sorts it into acsending order.
+// The krsort() function is like the ksort() function except that it sorts the keys of an array in descending order
 
-// used to iterate over items in an array
-// e.g.
-$colors = ['red', 'green', 'blue'];
+// usort()
+// To specify a custom comparison function for sorting, you use the usort() function
+$numbers = [2, 1, 3];
 
-foreach ($colors as $color) {
-	echo $color . '<br>';
-}
+usort($numbers, function ($x, $y) {
+    if ($x === $y) {
+        return 0;
+    }
+    return $x < $y ? -1 : 1;
+});
 
-// Adding items to a multi-dimensional array
-$tasks = [
-	['Learn PHP programming', 2],
-	['Practice PHP', 2],
-	['Work', 8],
-	['Do exercise', 1],
+print_r($numbers);
+
+// asort()
+// The asort() function sorts the elements of an associative array in ascending order. Unlike other sort functions, the asort() function maintains the index association.
+
+$mountains = [
+    'K2' => 8611,
+    'Lhotse' => 8516,
+    'Mount Everest' => 8848,
+    'Kangchenjunga' => 8586,
 ];
+asort($mountains);
 
-$tasks[] = ['Build something matter in PHP', 2];
-// adding the item
+print_r($mountains);
+// to sort an associative array in descending order and maintain the index association, you use the arsort() function.
 
-print_r($tasks );
 
-// Removing items from a multi-dimensional array
-$tasks = [
-	['Learn PHP programming', 2],
-	['Practice PHP', 2],
-	['Work', 8],
-	['Do exercise',1],
-];
+// Use the uasort() function to sort an associative array with a user-defined comparison function and maintains the index association.
 
-unset($tasks[2]);
-// uses unset
+// the uksort() function allows you to sort an array by key using a user-defined comparison function. Typically, you use the uksort() function to sort the keys of an associative array.
 
-print_r($tasks);
-
-// array_splice can be used to re-index arrays
-array_splice($tasks[2], 2, 1);
-
-// to iterate a multi-dimensional array you need a nested foreach loop
-foreach ($tasks as $task) {
-	foreach ($task as $task_detail) {
-		echo $task_detail . '<br>';
-	}
-}
+// An anonymous function is a function that doesn’t have a name.
+function ($x, $y) {
+	return $x * $y;
+};
+// An anonymous function can be assigned to a variable, passed to a function, or returned from a function.
