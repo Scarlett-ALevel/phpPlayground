@@ -1,26 +1,53 @@
-<?php 
+<?php
 
-define('WIDTH','1140px');
-define( 'ORIGIN', [0, 0] );
+$balance = 100;
+$message = 'Insufficient balance';
 
-/* define is used to set a constant. 
-function takes the constant’s name as the first argument and the constant value as the second argument.
-Constants are case sensitive e.g. WIDTH and width are different.
-contstants dont start with a $ sign.
-Constants can hold an array.
+var_dump($balance);
+//prints the string length and the variable type e.g. int(100)
+var_dump($message);
+//prints the variable type (string) and the length of characters (20)
+
+
+
+// putting the output in <pre> tags makes it more readable
+echo '<pre>';
+var_dump($balance);
+echo '</pre>';
+
+
+echo '<pre>';
+var_dump($message);
+echo '</pre>';
+
+
+// you can combine the var_dump() with die() functions
+$message = 'Dump and die example';
+
+echo '<pre>';
+var_dump($message);
+echo '</pre>';
+die();
+
+echo 'After calling the die function';
+// Since the die() function terminates the script immediately, this statement did not execute
+
+/* 
+First, dump the information about the $message variable using the var_dump() function.
+Second, terminate the script immediately by calling the die() function.
 */
 
-echo WIDTH;
-// echo = print
+//making the code reusable with functions
+function dd($data)
+{
+	echo '<pre>';
+	var_dump($data);
+	echo '</pre>';
+	die();
+}
 
-// const keyword - const CONSTANT_NAME = value;
+// .. dd function
 
-const SALES_TAX = 0.085;
+$message = 'Dump and die example';
 
-$gross_price = 100;
-
-$net_price = $gross_price * (1 + SALES_TAX);
-
-echo $net_price; // 108.5
-
-// define() is a function and const is a construct.
+dd($message);
