@@ -1,50 +1,33 @@
-<?php
+<!--DOCTYPE html-->
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf=8">
+        <title></title>
+    </head>
 
-interface Greeting
-{
-	public function greet();
-}
-// creates the public function greet
+    <body>
 
-class English implements Greeting
-{
-	public function greet()
-	{
-		return 'Hello!';
-	}
-}
+        <form action="functions.php" method="get">
+            <input type="text" name="num01" placeholder="Number 1">
+        <!--
+            creates a form in the HTML file
+            the placeholder is there until the user enters some data
+            the name is what the variable you save the data under is called
+        -->
+        <select name="oper">
+            <label>choose operation!</label>
+            <option value="add">add</option>
+            <option value="add">subtract</option>
+        <!-- adds the options for the user to choose in the form-->
+     </select>
+     <input type="text" name="num02" placeholder="Number 2">
+     <!--this is the second number -->
 
-class German implements Greeting
-{
-	public function greet()
-	{
-		return 'Hallo!';
-	}
-}
+     <button type ='submit'>calculate!</button>
 
-class French implements Greeting
-{
-	public function greet()
-	{
-		return 'Bonjour!';
-	}
-}
 
-// different classes are used to represent different languages version of greet.
+    </form>
+</body>
+</html>
 
-function greeting($greeters)
-{
-	foreach ($greeters as $greeter) {
-		echo $greeter->greet() . '<br>';
-	}
-}
-// this prints greet for each language 
 
-$greeters = [
-	new English(),
-	new German(),
-	new French(),
-];
-// these are the values passed through the class to output the greetings for.
-
-greeting($greeters);
